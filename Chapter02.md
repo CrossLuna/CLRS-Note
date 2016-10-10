@@ -35,3 +35,14 @@ void insertion_sort(BidirectionalIt first, BidirectionalIt last) {
     insertion_sort(first, last, std::less<typename std::iterator_traits<BidirectionalIt>::value_type>());
 }
 ```
+With `<algorithm>`, we can implement this way
+```C++
+template <typename BidirectionalIt, typename Compare>
+void insertion_sort(BidirectionalIt first, BidirectionalIt last, Compare comp) {
+    for(auto i = first; i != last; ++i) {
+        auto j = i;
+        ++j;
+        std::rotate(std::upper_bound(first, i, *i), i, j);
+    }
+}
+```
