@@ -4,12 +4,12 @@
 2. In place  
 3. Stable
 
-When implementation in C++, *bidirectional iterator* is needed.
+When implementation in C++, *foward iterator* is needed.
 
 ```C++
 // Insertion Sort
 template <typename BidirectionalIt, typename Compare>
-void insertion_sort(BidirectionalIt first, BidirectionalIt last, Compare comp) {
+void insertion_sort(BidirectionalIt first, BidirectionalIt last, Compare comp = std::less<>()) {
     if(first == last)
         return;
     
@@ -30,15 +30,15 @@ void insertion_sort(BidirectionalIt first, BidirectionalIt last, Compare comp) {
 
 
 // Insertion Sort (Default version)
-template <typename BidirectionalIt>
-void insertion_sort(BidirectionalIt first, BidirectionalIt last) {
+template <typename ForwardIt>
+void insertion_sort(ForwardIt first, ForwardIt last) {
     insertion_sort(first, last, std::less<typename std::iterator_traits<BidirectionalIt>::value_type>());
 }
 ```
 With `<algorithm>`, we can implement this way
 ```C++
-template <typename BidirectionalIt, typename Compare>
-void insertion_sort(BidirectionalIt first, BidirectionalIt last, Compare comp) {
+template <typename ForwardIt, typename Compare>
+void insertion_sort(ForwardIt first, ForwardIt last, Compare comp = std::less<>()) {
     for(auto i = first; i != last; ++i) {
         auto j = i;
         ++j;
